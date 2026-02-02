@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Link Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .generator-section {
+            display: block;
+        }
+
+        .valentine-section {
+            display: none;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .generated-link {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px dashed #667eea;
+        }
+
+        .link-container {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            word-break: break-all;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #667eea;
+        }
+
+        .copy-btn {
+            background: #28a745;
+            margin-top: 10px;
+        }
+
+        .copy-btn:hover {
+            background: #218838;
+        }
+
+        /* Valentine Popup Styles */
+        .valentine-content {
+            text-align: center;
+        }
+
+        .heart-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .valentine-title {
+            font-size: 32px;
+            color: #e91e63;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .valentine-message {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-height: 80px;
+            padding: 20px;
+        }
+
+        .valentine-btn {
+            padding: 15px 50px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 120px;
+        }
+
+        .yes-btn {
+            background: #e91e63;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .yes-btn:hover {
+            background: #c2185b;
+            transform: scale(1.05);
+        }
+
+        .no-btn {
+            background: #f0f0f0;
+            color: #666;
+            position: relative;
+            z-index: 1;
+        }
+
+        .no-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        .no-btn.moving {
+            position: fixed;
+            transition: all 0.2s ease-out;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 100px;
+            margin-bottom: 20px;
+        }
+
+        .success-text {
+            font-size: 28px;
+            color: #e91e63;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .success-subtitle {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .note {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #856404;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .valentine-title {
+                font-size: 26px;
+            }
+
+            .valentine-message {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Link Generator Section -->
+        <div class="generator-section" id="generatorSection">
+            <h1>💝 Valentine Link Generator</h1>
+            <p class="subtitle">Create personalized Valentine's Day proposals!</p>
+
+            <form id="linkForm">
+                <div class="form-group">
+                    <label for="fromName">Your Name (From):</label>
+                    <input type="text" id="fromName" placeholder="e.g., John" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="toName">Their Name (To):</label>
+                    <input type="text" id="toName" placeholder="e.g., Sarah" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Custom Title:</label>
+                    <input type="text" id="title" placeholder="e.g., Will you be my Valentine?" required>
+                </div>
+
+                <button type="submit" class="btn">✨ Generate Link</button>
+            </form>
+
+            <div class="generated-link" id="generatedLink">
+                <h3 style="color: #667eea; margin-bottom: 10px;">🎉 Your Link is Ready!</h3>
+                <div class="link-container" id="linkDisplay"></div>
+                <button class="btn copy-btn" id="copyBtn">📋 Copy Link</button>
+                <button class="btn" id="createAnother">Create Another Link</button>
+                
+                <div class="note">
+                    <strong>💡 Pro Tip:</strong> Send this unique link to anyone! Each person will see their personalized Valentine proposal. Perfect for Instagram/TikTok reels!
+                </div>
+            </div>
+        </div>
+
+        <!-- Valentine Popup Section -->
+        <div class="valentine-section" id="valentineSection">
+            <div class="valentine-content" id="valentineContent">
+                <div class="heart-icon">❤️</div>
+                <h2 class="valentine-title" id="valentineTitle">Will you be my Valentine?</h2>
+                <p class="valentine-message" id="valentineMessage">
+                    Hey <strong id="toNameDisplay">there</strong>! 
+                    <br><strong id="fromNameDisplay">Someone special</strong> has a question for you...
+                </p>
+                <div class="button-container">
+                    <button class="valentine-btn yes-btn" id="yesBtn">Yes! 💕</button>
+                    <button class="valentine-btn no-btn" id="noBtn">No</button>
+                </div>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">🎉</div>
+                <h2 class="success-text">Yay! 💖</h2>
+                <p class="success-subtitle">They said YES!</p>
+                <button class="btn" onclick="window.location.href=window.location.pathname">Create Your Own</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Parse URL parameters
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                from: params.get('from'),
+                to: params.get('to'),
+                title: params.get('title')
+            };
+        }
+
+        // Check if this is a valentine link or generator page
+        const params = getUrlParams();
+        if (params.from && params.to && params.title) {
+            // Show valentine section
+            document.getElementById('generatorSection').style.display = 'none';
+            document.getElementById('valentineSection').style.display = 'block';
+            
+            // Set custom values
+            document.getElementById('fromNameDisplay').textContent = decodeURIComponent(params.from);
+            document.getElementById('toNameDisplay').textContent = decodeURIComponent(params.to);
+            document.getElementById('valentineTitle').textContent = decodeURIComponent(params.title);
+            
+            // Initialize moving No button
+            initializeNoButton();
+        } else {
+            // Show generator section
+            initializeGenerator();
+        }
+
+        // Generator functionality
+        function initializeGenerator() {
+            const form = document.getElementById('linkForm');
+            const generatedLinkDiv = document.getElementById('generatedLink');
+            const linkDisplay = document.getElementById('linkDisplay');
+            const copyBtn = document.getElementById('copyBtn');
+            const createAnotherBtn = document.getElementById('createAnother');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const fromName = document.getElementById('fromName').value;
+                const toName = document.getElementById('toName').value;
+                const title = document.getElementById('title').value;
+
+                // Generate link
+                const baseUrl = window.location.origin + window.location.pathname;
+                const link = `${baseUrl}?from=${encodeURIComponent(fromName)}&to=${encodeURIComponent(toName)}&title=${encodeURIComponent(title)}`;
+                
+                linkDisplay.textContent = link;
+                generatedLinkDiv.style.display = 'block';
+                
+                // Scroll to link
+                generatedLinkDiv.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            copyBtn.addEventListener('click', () => {
+                const link = linkDisplay.textContent;
+                navigator.clipboard.writeText(link).then(() => {
+                    copyBtn.textContent = '✅ Copied!';
+                    setTimeout(() => {
+                        copyBtn.textContent = '📋 Copy Link';
+                    }, 2000);
+                });
+            });
+
+            createAnotherBtn.addEventListener('click', () => {
+                form.reset();
+                generatedLinkDiv.style.display = 'none';
+            });
+        }
+
+        // Valentine section functionality
+        function initializeNoButton() {
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+            const valentineContent = document.getElementById('valentineContent');
+            const successMessage = document.getElementById('successMessage');
+
+            // Move No button on hover
+            noBtn.addEventListener('mouseenter', () => {
+                noBtn.classList.add('moving');
+                
+                // Get viewport dimensions
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                
+                // Get button dimensions
+                const btnWidth = noBtn.offsetWidth;
+                const btnHeight = noBtn.offsetHeight;
+                
+                // Calculate safe random position (avoiding edges)
+                const maxX = viewportWidth - btnWidth - 20;
+                const maxY = viewportHeight - btnHeight - 20;
+                
+                const randomX = Math.max(20, Math.random() * maxX);
+                const randomY = Math.max(20, Math.random() * maxY);
+                
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
+            });
+
+            // Also trigger on touch for mobile
+            noBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const event = new Event('mouseenter');
+                noBtn.dispatchEvent(event);
+            });
+
+            // Handle Yes button click
+            yesBtn.addEventListener('click', () => {
+                valentineContent.style.display = 'none';
+                successMessage.style.display = 'block';
+            });
+
+            // Prevent No button click (just in case someone is fast)
+            noBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const event = new Event('mouseenter');
+                noBtn.dispatchEvent(event);
+            });
+        }
+    </script>
+</body>
+</html>
