@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will you be my valentine😍</title>
+    <title>Valentine Link Generator</title>
     <style>
         * {
             margin: 0;
@@ -39,96 +39,96 @@
             display: none;
         }
 
-       /* Cat Character - Cuter Version */
-.cat-container {
-    position: relative;
-    margin: 0 auto 30px;
-    width: 180px;
-    height: 140px;
-}
+        /* Cat Character */
+        .cat-container {
+            position: relative;
+            margin: 0 auto 30px;
+            width: 150px;
+            height: 150px;
+        }
 
-.cat-face {
-    width: 160px;
-    height: 130px;
-    background: #f4c5a3;
-    border-radius: 50% 50% 50% 50%;
-    position: relative;
-    margin: 0 auto;
-    box-shadow: 0 8px 20px rgba(244, 197, 163, 0.3);
-}
+        .cat-face {
+            width: 150px;
+            height: 120px;
+            background: #f5dbb8;
+            border-radius: 50% 50% 45% 45%;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
 
-.cat-ear-left, .cat-ear-right {
-    width: 35px;
-    height: 35px;
-    background: #f4c5a3;
-    border-radius: 80% 0 50% 50%;
-    position: absolute;
-    top: -8px;
-}
+        .cat-ear-left, .cat-ear-right {
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 40px solid #f5dbb8;
+            position: absolute;
+            top: -20px;
+        }
 
-.cat-ear-left {
-    left: 20px;
-    transform: rotate(-40deg);
-}
+        .cat-ear-left {
+            left: 15px;
+            transform: rotate(-20deg);
+        }
 
-.cat-ear-right {
-    right: 20px;
-    transform: rotate(40deg) scaleX(-1);
-}
+        .cat-ear-right {
+            right: 15px;
+            transform: rotate(20deg);
+        }
 
-.cat-eyes {
-    display: flex;
-    justify-content: center;
-    gap: 45px;
-    padding-top: 45px;
-}
+        .cat-eyes {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-top: 35px;
+        }
 
-.cat-eye {
-    width: 14px;
-    height: 14px;
-    background: #000;
-    border-radius: 50%;
-}
+        .cat-eye {
+            width: 12px;
+            height: 12px;
+            background: #000;
+            border-radius: 50%;
+        }
 
-.cat-nose {
-    width: 12px;
-    height: 10px;
-    background: #ff6b9d;
-    border-radius: 50%;
-    margin: 12px auto 0;
-}
+        .cat-nose {
+            width: 10px;
+            height: 8px;
+            background: #ff69b4;
+            border-radius: 50%;
+            margin: 8px auto;
+        }
 
-.cat-blush-left, .cat-blush-right {
-    width: 30px;
-    height: 18px;
-    background: #f5b5a0;
-    border-radius: 50%;
-    position: absolute;
-    top: 58px;
-    opacity: 0.7;
-}
+        .cat-blush-left, .cat-blush-right {
+            width: 25px;
+            height: 15px;
+            background: #ffc0cb;
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+            opacity: 0.6;
+        }
 
-.cat-blush-left {
-    left: 15px;
-}
+        .cat-blush-left {
+            left: 10px;
+        }
 
-.cat-blush-right {
-    right: 15px;
-}
+        .cat-blush-right {
+            right: 10px;
+        }
 
-.heart-decoration {
-    position: absolute;
-    top: -5px;
-    right: 0px;
-    font-size: 50px;
-    animation: float 3s ease-in-out infinite;
-    filter: drop-shadow(0 4px 8px rgba(255, 107, 157, 0.3));
-}
+        .heart-decoration {
+            position: absolute;
+            top: 0;
+            right: -10px;
+            font-size: 45px;
+            animation: float 3s ease-in-out infinite;
+        }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(-5deg); }
-    50% { transform: translateY(-8px) rotate(5deg); }
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
 
         h1 {
             color: #333;
@@ -298,18 +298,70 @@
         .success-message {
             display: none;
             text-align: center;
+            position: relative;
         }
 
-        .success-icon {
-            font-size: 100px;
-            margin-bottom: 20px;
-            animation: bounce 0.6s ease;
+        /* Glitter Shower Animation */
+        .glitter-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 10;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        .glitter {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+            border-radius: 50%;
+            animation: fall linear infinite;
+            opacity: 0;
+            box-shadow: 0 0 10px #ffd700;
         }
+
+        @keyframes fall {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(500px) rotate(360deg);
+            }
+        }
+
+        /* Generate multiple glitter particles */
+        .glitter:nth-child(1) { left: 10%; animation-duration: 3s; animation-delay: 0s; }
+        .glitter:nth-child(2) { left: 20%; animation-duration: 3.5s; animation-delay: 0.2s; background: linear-gradient(45deg, #ff69b4, #ff1493); box-shadow: 0 0 10px #ff69b4; }
+        .glitter:nth-child(3) { left: 30%; animation-duration: 2.8s; animation-delay: 0.4s; }
+        .glitter:nth-child(4) { left: 40%; animation-duration: 3.2s; animation-delay: 0.1s; background: linear-gradient(45deg, #ff69b4, #ff1493); box-shadow: 0 0 10px #ff69b4; }
+        .glitter:nth-child(5) { left: 50%; animation-duration: 3s; animation-delay: 0.3s; }
+        .glitter:nth-child(6) { left: 60%; animation-duration: 3.3s; animation-delay: 0.5s; background: linear-gradient(45deg, #ff69b4, #ff1493); box-shadow: 0 0 10px #ff69b4; }
+        .glitter:nth-child(7) { left: 70%; animation-duration: 2.9s; animation-delay: 0.2s; }
+        .glitter:nth-child(8) { left: 80%; animation-duration: 3.1s; animation-delay: 0.4s; background: linear-gradient(45deg, #ff69b4, #ff1493); box-shadow: 0 0 10px #ff69b4; }
+        .glitter:nth-child(9) { left: 90%; animation-duration: 3.4s; animation-delay: 0.1s; }
+        .glitter:nth-child(10) { left: 15%; animation-duration: 2.7s; animation-delay: 0.6s; background: linear-gradient(45deg, #ff69b4, #ff1493); box-shadow: 0 0 10px #ff69b4; }
+        .glitter:nth-child(11) { left: 25%; animation-duration: 3s; animation-delay: 0.3s; }
+        .glitter:nth-child(12) { left: 35%; animation-duration: 3.2s; animation-delay: 0.5s; background: linear-gradient(45deg, #ff69b4, #ff1493); box-shadow: 0 0 10px #ff69b4; }
+        .glitter:nth-child(13) { left: 45%; animation-duration: 2.8s; animation-delay: 0.2s; }
+        .glitter:nth-child(14) { left: 55%; animation-duration: 3.3s; animation-delay: 0.4s; background: linear-gradient(45deg, #ff69b4, #ff1493); box-shadow: 0 0 10px #ff69b4; }
+        .glitter:nth-child(15) { left: 65%; animation-duration: 3.1s; animation-delay: 0.1s; }
+        .glitter:nth-child(16) { left: 75%; animation-duration: 2.9s; animation-delay: 0.5s; background: linear-gradient(45deg, #ff69b4, #ff1493); box-shadow: 0 0 10px #ff69b4; }
+        .glitter:nth-child(17) { left: 85%; animation-duration: 3.2s; animation-delay: 0.3s; }
+        .glitter:nth-child(18) { left: 95%; animation-duration: 3s; animation-delay: 0.2s; background: linear-gradient(45deg, #ff69b4, #ff1493); box-shadow: 0 0 10px #ff69b4; }
+        .glitter:nth-child(19) { left: 5%; animation-duration: 2.8s; animation-delay: 0.4s; }
+        .glitter:nth-child(20) { left: 50%; animation-duration: 3.1s; animation-delay: 0.6s; background: linear-gradient(45deg, #ff69b4, #ff1493); box-shadow: 0 0 10px #ff69b4; }
 
         /* GIPHY Sticker Animation */
         .kissing-animation {
@@ -392,7 +444,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="toName">Valentine Name (To):</label>
+                    <label for="toName">Their Name (To):</label>
                     <input type="text" id="toName" placeholder="e.g., Sarah" required>
                 </div>
 
@@ -442,7 +494,29 @@
             </div>
 
             <div class="success-message" id="successMessage">
-                <div class="success-icon">🎉💕</div>
+                <!-- Glitter Shower -->
+                <div class="glitter-container">
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                    <div class="glitter"></div>
+                </div>
                 
                 <!-- GIPHY Cute Hugging Cats Sticker -->
                 <div class="kissing-animation" id="kissingAnimation">
