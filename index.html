@@ -298,6 +298,11 @@
             text-align: center;
             position: relative;
         }
+        .button-container {
+    position: relative; /* Already exists, but ensures proper positioning */
+    overflow: visible; /* Prevent clipping */
+}
+
 
         /* Glitter Shower Animation */
         .glitter-container {
@@ -618,59 +623,66 @@
         }
 
         // Valentine section functionality
-        function initializeNoButton() {
-            const noBtn = document.getElementById('noBtn');
-            const yesBtn = document.getElementById('yesBtn');
-            const valentineContent = document.getElementById('valentineContent');
-            const successMessage = document.getElementById('successMessage');
+     // Valentine section functionality
+function initializeNoButton() {
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const valentineContent = document.getElementById('valentineContent');
+    const successMessage = document.getElementById('successMessage');
+    const buttonContainer = document.querySelector('.button-container'); // Target the button container specifically
 
-            // Move No button on hover (for desktop) - restricted to container
-            noBtn.addEventListener('mouseenter', () => {
-                const container = document.querySelector('.container');
-                const containerRect = container.getBoundingClientRect();
-                
-                // Get button dimensions
-                const btnWidth = noBtn.offsetWidth;
-                const btnHeight = noBtn.offsetHeight;
-                
-                // Calculate random position within container boundaries
-                const maxX = containerRect.width - btnWidth - 40; // 40px padding from edges
-                const maxY = containerRect.height - btnHeight - 40;
-                
-                const randomX = Math.max(20, Math.random() * maxX);
-                const randomY = Math.max(20, Math.random() * maxY);
-                
-                // Position relative to container
-                noBtn.style.position = 'absolute';
-                noBtn.style.left = randomX + 'px';
-                noBtn.style.top = randomY + 'px';
-            });
+    // Move No button on hover (for desktop) - restricted to button-container
+    noBtn.addEventListener('mouseenter', () => {
+        const containerRect = buttonContainer.getBoundingClientRect();
+        
+        // Get button dimensions
+        const btnWidth = noBtn.offsetWidth;
+        const btnHeight = noBtn.offsetHeight;
+        
+        // Calculate random position within button-container boundaries only
+        const maxX = containerRect.width - btnWidth - 10; // Small padding from edges
+        const maxY = containerRect.height - btnHeight - 10;
+        
+        const randomX = Math.max(5, Math.random() * maxX);
+        const randomY = Math.max(5, Math.random() * maxY);
+        
+        // Position relative to button-container
+        noBtn.style.position = 'absolute';
+        noBtn.style.left = randomX + 'px';
+        noBtn.style.top = randomY + 'px';
+        noBtn.style.transform = 'none'; // Reset any transform
+    });
 
-            // Also trigger on touch for mobile
-            noBtn.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                const event = new Event('mouseenter');
-                noBtn.dispatchEvent(event);
-            });
+    // Also trigger on touch for mobile
+    noBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const event = new Event('mouseenter');
+        noBtn.dispatchEvent(event);
+    });
 
-            // Handle Yes button click
-            yesBtn.addEventListener('click', () => {
-                valentineContent.style.display = 'none';
-                successMessage.style.display = 'block';
-                
-                // Show kissing animation with delay
-                setTimeout(() => {
-                    document.getElementById('kissingAnimation').style.display = 'block';
-                }, 300);
-            });
+    // Handle Yes button click
+    yesBtn.addEventListener('click', () => {
+        valentineContent.style.display = 'none';
+        successMessage.style.display = 'block';
+        
+        // Show kissing animation with delay
+        setTimeout(() => {
+            document.getElementById('kissingAnimation').style.display = 'block';
+        }, 300);
+    });
 
-            // Prevent No button click (just in case someone is fast)
-            noBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const event = new Event('mouseenter');
-                noBtn.dispatchEvent(event);
-            });
-        }
+    // Prevent No button click (just in case someone is fast)
+    noBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const event = new Event('mouseenter');
+        noBtn.dispatchEvent(event);
+    });
+
+    // Ensure button-container is relatively positioned for absolute child positioning
+    buttonContainer.style.position = 'relative';
+}
+
     </script>
 </body>
 </html>
