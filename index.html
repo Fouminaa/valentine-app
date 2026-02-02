@@ -311,13 +311,12 @@
             50% { transform: translateY(-20px); }
         }
 
-        /* Cute Kissing Characters Animation */
+        /* GIPHY Sticker Animation */
         .kissing-animation {
-            width: 300px;
-            height: 220px;
+            width: 280px;
+            height: 280px;
             margin: 30px auto;
             display: none;
-            position: relative;
             animation: fadeInScale 0.6s ease-in;
         }
 
@@ -326,209 +325,10 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        .character {
-            position: absolute;
-            width: 110px;
-            height: 130px;
-            top: 50px;
-        }
-
-        .character-left {
-            left: 30px;
-            animation: kissLeft 2s ease-in-out infinite;
-        }
-
-        .character-right {
-            right: 30px;
-            animation: kissRight 2s ease-in-out infinite;
-        }
-
-        @keyframes kissLeft {
-            0%, 100% { transform: translateX(0) rotate(0deg); }
-            50% { transform: translateX(12px) rotate(3deg); }
-        }
-
-        @keyframes kissRight {
-            0%, 100% { transform: translateX(0) rotate(0deg); }
-            50% { transform: translateX(-12px) rotate(-3deg); }
-        }
-
-        /* Character Head */
-        .character-head {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            position: relative;
-            margin: 0 auto;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .character-left .character-head {
-            background: linear-gradient(135deg, #b8a89a 0%, #9d8f81 100%);
-        }
-
-        .character-right .character-head {
-            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-        }
-
-        /* Ears */
-        .character-ear {
-            width: 35px;
-            height: 35px;
-            border-radius: 50% 50% 0 50%;
-            position: absolute;
-            top: -5px;
-        }
-
-        .character-left .character-ear {
-            background: #b8a89a;
-        }
-
-        .character-right .character-ear {
-            background: #ffffff;
-        }
-
-        .ear-left {
-            left: -5px;
-            transform: rotate(-35deg);
-        }
-
-        .ear-right {
-            right: -5px;
-            transform: rotate(35deg) scaleX(-1);
-        }
-
-        /* Inner Ear */
-        .ear-inner {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            position: absolute;
-            top: 8px;
-            left: 8px;
-        }
-
-        .character-left .ear-inner {
-            background: #e8bfad;
-        }
-
-        .character-right .ear-inner {
-            background: #ffc0cb;
-        }
-
-        /* Eyes */
-        .character-eyes {
-            display: flex;
-            justify-content: center;
-            gap: 28px;
-            margin-top: 35px;
-        }
-
-        .character-eye {
-            width: 10px;
-            height: 10px;
-            background: #000;
-            border-radius: 50%;
-        }
-
-        /* Blush */
-        .character-blush {
-            width: 22px;
-            height: 14px;
-            border-radius: 50%;
-            position: absolute;
-            top: 52px;
-            opacity: 0.5;
-        }
-
-        .character-left .character-blush {
-            background: #e8bfad;
-        }
-
-        .character-right .character-blush {
-            background: #ffb6c1;
-        }
-
-        .blush-left {
-            left: 12px;
-        }
-
-        .blush-right {
-            right: 12px;
-        }
-
-        /* Nose/Snout */
-        .character-snout {
-            width: 15px;
-            height: 12px;
-            background: #ffb6c1;
-            border-radius: 50%;
-            position: absolute;
-            bottom: 28px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .character-left .character-snout {
-            background: #d4a88f;
-        }
-
-        /* Body */
-        .character-body {
-            width: 70px;
-            height: 50px;
-            border-radius: 50%;
-            margin: -10px auto 0;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .character-left .character-body {
-            background: linear-gradient(135deg, #b8a89a 0%, #9d8f81 100%);
-        }
-
-        .character-right .character-body {
-            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-        }
-
-        /* Floating Hearts */
-        .floating-hearts {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
+        .kissing-animation img {
             width: 100%;
             height: 100%;
-            pointer-events: none;
-        }
-
-        .heart-float {
-            position: absolute;
-            font-size: 30px;
-            animation: floatUp 3s ease-in-out infinite;
-            opacity: 0;
-        }
-
-        .heart-1 { left: 35%; animation-delay: 0s; }
-        .heart-2 { left: 50%; animation-delay: 1s; font-size: 35px; }
-        .heart-3 { left: 65%; animation-delay: 2s; }
-
-        @keyframes floatUp {
-            0% { 
-                bottom: 45%;
-                opacity: 0;
-                transform: translateY(0) scale(0.3) rotate(0deg);
-            }
-            30% { 
-                opacity: 1;
-            }
-            70% { 
-                opacity: 1;
-            }
-            100% { 
-                bottom: 90%;
-                opacity: 0;
-                transform: translateY(-50px) scale(0.8) rotate(15deg);
-            }
+            object-fit: contain;
         }
 
         .success-text {
@@ -644,54 +444,9 @@
             <div class="success-message" id="successMessage">
                 <div class="success-icon">🎉💕</div>
                 
-                <!-- Kissing Characters Animation -->
+                <!-- GIPHY Cute Hugging Cats Sticker -->
                 <div class="kissing-animation" id="kissingAnimation">
-                    <!-- Floating Hearts -->
-                    <div class="floating-hearts">
-                        <div class="heart-float heart-1">💕</div>
-                        <div class="heart-float heart-2">❤️</div>
-                        <div class="heart-float heart-3">💖</div>
-                    </div>
-                    
-                    <!-- Gray/Brown Character (Left) -->
-                    <div class="character character-left">
-                        <div class="character-head">
-                            <div class="character-ear ear-left">
-                                <div class="ear-inner"></div>
-                            </div>
-                            <div class="character-ear ear-right">
-                                <div class="ear-inner"></div>
-                            </div>
-                            <div class="character-eyes">
-                                <div class="character-eye"></div>
-                                <div class="character-eye"></div>
-                            </div>
-                            <div class="character-blush blush-left"></div>
-                            <div class="character-blush blush-right"></div>
-                            <div class="character-snout"></div>
-                        </div>
-                        <div class="character-body"></div>
-                    </div>
-                    
-                    <!-- White Character (Right) -->
-                    <div class="character character-right">
-                        <div class="character-head">
-                            <div class="character-ear ear-left">
-                                <div class="ear-inner"></div>
-                            </div>
-                            <div class="character-ear ear-right">
-                                <div class="ear-inner"></div>
-                            </div>
-                            <div class="character-eyes">
-                                <div class="character-eye"></div>
-                                <div class="character-eye"></div>
-                            </div>
-                            <div class="character-blush blush-left"></div>
-                            <div class="character-blush blush-right"></div>
-                            <div class="character-snout"></div>
-                        </div>
-                        <div class="character-body"></div>
-                    </div>
+                    <img src="https://media.giphy.com/media/KmxmoHUGPDjfQXqGgv/giphy.gif" alt="Cute hugging cats">
                 </div>
                 
                 <h2 class="success-text">Yay! 💖</h2>
