@@ -30,7 +30,7 @@
             width: 100%;
             text-align: center;
             position: relative;
-            overflow: visible;
+            overflow: hidden;
         }
 
         .generator-section {
@@ -39,8 +39,6 @@
 
         .valentine-section {
             display: none;
-            position: relative;
-            min-height: 500px;
         }
 
        /* Cat Character - Cuter Version */
@@ -242,9 +240,12 @@
         }
 
         .button-container {
-            display: block;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
             position: relative;
-            min-height: 250px;
+            min-height: 80px;
             padding: 20px;
             margin-bottom: 20px;
         }
@@ -259,29 +260,25 @@
             transition: all 0.3s;
             min-width: 120px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            position: absolute;
         }
 
         .yes-btn {
             background: #ff1493;
             color: white;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%) translate(-80px, 0);
-            z-index: 2;
+            position: relative;
+            z-index: 1;
         }
 
         .yes-btn:hover {
             background: #ff69b4;
+            transform: scale(1.05);
             box-shadow: 0 6px 20px rgba(255, 20, 147, 0.3);
         }
 
         .no-btn {
             background: #e8e8e8;
             color: #666;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%) translate(80px, 0);
+            position: relative;
             z-index: 1;
             transition: all 0.2s ease-out;
         }
@@ -457,12 +454,12 @@
 
             <form id="linkForm">
                 <div class="form-group">
-                    <label for="fromName">Your Name (From):</label>
+                    <label for="fromName">Your Name:</label>
                     <input type="text" id="fromName" placeholder="e.g., John" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="toName">Valentine Name (To):</label>
+                    <label for="toName">Valentine Name:</label>
                     <input type="text" id="toName" placeholder="e.g., Sarah" required>
                 </div>
 
@@ -507,7 +504,7 @@
                     <span id="toNameDisplay">Hey there</span>, will you be my valentine?
                 </h2>
                 
-                <div class="button-container" id="buttonContainer">
+                <div class="button-container">
                     <button class="valentine-btn yes-btn" id="yesBtn">Yes</button>
                     <button class="valentine-btn no-btn" id="noBtn">No</button>
                 </div>
@@ -626,39 +623,27 @@
             const yesBtn = document.getElementById('yesBtn');
             const valentineContent = document.getElementById('valentineContent');
             const successMessage = document.getElementById('successMessage');
-            const buttonContainer = document.getElementById('buttonContainer');
-            
-            let yesButtonScale = 1; // Track the scale of Yes button
-            let yesPadding = 16; // Initial padding
-            let yesMinWidth = 120; // Initial min-width
 
-            // Move No button on hover (for desktop) - restricted to button container
+            // Move No button on hover (for desktop) - restricted to container
             noBtn.addEventListener('mouseenter', () => {
-                const containerRect = buttonContainer.getBoundingClientRect();
+                const container = document.querySelector('.container');
+                const containerRect = container.getBoundingClientRect();
+                
+                // Get button dimensions
                 const btnWidth = noBtn.offsetWidth;
                 const btnHeight = noBtn.offsetHeight;
                 
-                // Calculate safe boundaries within the button container
-                const maxX = containerRect.width - btnWidth - 40; // 40px padding
+                // Calculate random position within container boundaries
+                const maxX = containerRect.width - btnWidth - 40; // 40px padding from edges
                 const maxY = containerRect.height - btnHeight - 40;
                 
-                // Generate random position
                 const randomX = Math.max(20, Math.random() * maxX);
                 const randomY = Math.max(20, Math.random() * maxY);
                 
-                // Apply position - remove transform and use left/top directly
-                noBtn.style.transform = 'none';
+                // Position relative to container
+                noBtn.style.position = 'absolute';
                 noBtn.style.left = randomX + 'px';
                 noBtn.style.top = randomY + 'px';
-                
-                // Grow Yes button
-                yesButtonScale += 0.15;
-                yesPadding += 3;
-                yesMinWidth += 15;
-                
-                yesBtn.style.transform = `translate(-50%, -50%) translate(-${80 + (yesButtonScale - 1) * 20}px, 0) scale(${yesButtonScale})`;
-                yesBtn.style.padding = `${yesPadding}px ${yesPadding * 3}px`;
-                yesBtn.style.minWidth = `${yesMinWidth}px`;
             });
 
             // Also trigger on touch for mobile
