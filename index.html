@@ -30,7 +30,7 @@
             width: 100%;
             text-align: center;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .generator-section {
@@ -39,6 +39,8 @@
 
         .valentine-section {
             display: none;
+            position: relative;
+            min-height: 500px;
         }
 
        /* Cat Character - Cuter Version */
@@ -245,7 +247,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            min-height: 80px;
+            min-height: 200px;
             padding: 20px;
             margin-bottom: 20px;
         }
@@ -278,7 +280,7 @@
         .no-btn {
             background: #e8e8e8;
             color: #666;
-            position: relative;
+            position: absolute;
             z-index: 1;
             transition: all 0.2s ease-out;
         }
@@ -504,7 +506,7 @@
                     <span id="toNameDisplay">Hey there</span>, will you be my valentine?
                 </h2>
                 
-                <div class="button-container">
+                <div class="button-container" id="buttonContainer">
                     <button class="valentine-btn yes-btn" id="yesBtn">Yes</button>
                     <button class="valentine-btn no-btn" id="noBtn">No</button>
                 </div>
@@ -623,25 +625,23 @@
             const yesBtn = document.getElementById('yesBtn');
             const valentineContent = document.getElementById('valentineContent');
             const successMessage = document.getElementById('successMessage');
+            const buttonContainer = document.getElementById('buttonContainer');
 
-            // Move No button on hover (for desktop) - restricted to container
+            // Move No button on hover (for desktop) - restricted to button container
             noBtn.addEventListener('mouseenter', () => {
-                const container = document.querySelector('.container');
-                const containerRect = container.getBoundingClientRect();
-                
-                // Get button dimensions
+                const containerRect = buttonContainer.getBoundingClientRect();
                 const btnWidth = noBtn.offsetWidth;
                 const btnHeight = noBtn.offsetHeight;
                 
-                // Calculate random position within container boundaries
-                const maxX = containerRect.width - btnWidth - 40; // 40px padding from edges
-                const maxY = containerRect.height - btnHeight - 40;
+                // Calculate safe boundaries within the button container
+                const maxX = containerRect.width - btnWidth - 20; // 20px padding
+                const maxY = containerRect.height - btnHeight - 20;
                 
-                const randomX = Math.max(20, Math.random() * maxX);
-                const randomY = Math.max(20, Math.random() * maxY);
+                // Generate random position
+                const randomX = Math.max(10, Math.random() * maxX);
+                const randomY = Math.max(10, Math.random() * maxY);
                 
-                // Position relative to container
-                noBtn.style.position = 'absolute';
+                // Apply position
                 noBtn.style.left = randomX + 'px';
                 noBtn.style.top = randomY + 'px';
             });
