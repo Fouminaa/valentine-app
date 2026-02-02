@@ -242,12 +242,9 @@
         }
 
         .button-container {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
+            display: block;
             position: relative;
-            min-height: 200px;
+            min-height: 250px;
             padding: 20px;
             margin-bottom: 20px;
         }
@@ -262,25 +259,29 @@
             transition: all 0.3s;
             min-width: 120px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: absolute;
         }
 
         .yes-btn {
             background: #ff1493;
             color: white;
-            position: relative;
-            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) translate(-80px, 0);
+            z-index: 2;
         }
 
         .yes-btn:hover {
             background: #ff69b4;
-            transform: scale(1.05);
             box-shadow: 0 6px 20px rgba(255, 20, 147, 0.3);
         }
 
         .no-btn {
             background: #e8e8e8;
             color: #666;
-            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) translate(80px, 0);
             z-index: 1;
             transition: all 0.2s ease-out;
         }
@@ -626,6 +627,10 @@
             const valentineContent = document.getElementById('valentineContent');
             const successMessage = document.getElementById('successMessage');
             const buttonContainer = document.getElementById('buttonContainer');
+            
+            let yesButtonScale = 1; // Track the scale of Yes button
+            let yesPadding = 16; // Initial padding
+            let yesMinWidth = 120; // Initial min-width
 
             // Move No button on hover (for desktop) - restricted to button container
             noBtn.addEventListener('mouseenter', () => {
@@ -634,16 +639,26 @@
                 const btnHeight = noBtn.offsetHeight;
                 
                 // Calculate safe boundaries within the button container
-                const maxX = containerRect.width - btnWidth - 20; // 20px padding
-                const maxY = containerRect.height - btnHeight - 20;
+                const maxX = containerRect.width - btnWidth - 40; // 40px padding
+                const maxY = containerRect.height - btnHeight - 40;
                 
                 // Generate random position
-                const randomX = Math.max(10, Math.random() * maxX);
-                const randomY = Math.max(10, Math.random() * maxY);
+                const randomX = Math.max(20, Math.random() * maxX);
+                const randomY = Math.max(20, Math.random() * maxY);
                 
-                // Apply position
+                // Apply position - remove transform and use left/top directly
+                noBtn.style.transform = 'none';
                 noBtn.style.left = randomX + 'px';
                 noBtn.style.top = randomY + 'px';
+                
+                // Grow Yes button
+                yesButtonScale += 0.15;
+                yesPadding += 3;
+                yesMinWidth += 15;
+                
+                yesBtn.style.transform = `translate(-50%, -50%) translate(-${80 + (yesButtonScale - 1) * 20}px, 0) scale(${yesButtonScale})`;
+                yesBtn.style.padding = `${yesPadding}px ${yesPadding * 3}px`;
+                yesBtn.style.minWidth = `${yesMinWidth}px`;
             });
 
             // Also trigger on touch for mobile
