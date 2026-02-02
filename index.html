@@ -29,6 +29,8 @@
             max-width: 450px;
             width: 100%;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .generator-section {
@@ -278,15 +280,11 @@
             color: #666;
             position: relative;
             z-index: 1;
+            transition: all 0.2s ease-out;
         }
 
         .no-btn:hover {
             background: #d0d0d0;
-        }
-        
-        .no-btn.moving {
-            position: fixed;
-            transition: all 0.2s ease-out;
         }
 
         .shy-message {
@@ -605,25 +603,24 @@
             const valentineContent = document.getElementById('valentineContent');
             const successMessage = document.getElementById('successMessage');
 
-            // Move No button on hover (for desktop)
+            // Move No button on hover (for desktop) - restricted to container
             noBtn.addEventListener('mouseenter', () => {
-                noBtn.classList.add('moving');
-                
-                // Get viewport dimensions
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
+                const container = document.querySelector('.container');
+                const containerRect = container.getBoundingClientRect();
                 
                 // Get button dimensions
                 const btnWidth = noBtn.offsetWidth;
                 const btnHeight = noBtn.offsetHeight;
                 
-                // Calculate safe random position (avoiding edges)
-                const maxX = viewportWidth - btnWidth - 20;
-                const maxY = viewportHeight - btnHeight - 20;
+                // Calculate random position within container boundaries
+                const maxX = containerRect.width - btnWidth - 40; // 40px padding from edges
+                const maxY = containerRect.height - btnHeight - 40;
                 
                 const randomX = Math.max(20, Math.random() * maxX);
                 const randomY = Math.max(20, Math.random() * maxY);
                 
+                // Position relative to container
+                noBtn.style.position = 'absolute';
                 noBtn.style.left = randomX + 'px';
                 noBtn.style.top = randomY + 'px';
             });
